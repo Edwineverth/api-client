@@ -1,5 +1,6 @@
 db = db.getSiblingDB('clientDB');
 db.createCollection('client');
+db.client.createIndex({ clientId: 1 }, { unique: true });
 db.client.insertMany([
     {
         "address": "AVENIDA LAS AMERICAS CALI",
