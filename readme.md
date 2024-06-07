@@ -44,6 +44,10 @@ MONGO_DB=clientDB
 SERVER_PORT=8080
 ```
 ## Uso
+Antes de construir crear una red compartida para los contenedores:
+```shell
+docker network create backend
+```
 
 Construir y ejecutar la aplicación con Docker Compose
 Construye y ejecuta los contenedores:
@@ -51,8 +55,9 @@ Construye y ejecuta los contenedores:
 ```bash
 Copiar código
 docker-compose up --build
-La aplicación estará disponible en http://localhost:8080.
 ```
+La aplicación estará disponible en http://localhost:8080.
+
 ## Nota:
 Al correr la aplicación correrá un pequeño script para llenar con información inicial la DB.
 En baso de querer insertar más información modificar el archivo.
