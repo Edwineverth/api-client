@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  mongo-client:
+    image: mongo
+    container_name: mongo-client
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+    volumes:
+      - mongo-client-data:/data/db
+      - ./init-client.js:/docker-entrypoint-initdb.d/init-client.js:ro
+    command: ["mongod", "--bind_ip_all"]
+
+  api-client:
+    build: .
+    environment:
+      - MONGO_URI=mongodb://mongo-client:27017
+      - MONGO_DB=clientDB
+      - SERVER_PORT=8080
+    depends_on:
+      - mongo-client
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  mongo-client-data:
